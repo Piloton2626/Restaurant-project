@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"app/database"
@@ -16,6 +17,7 @@ import (
 var foodCollection *mongo.Collection = database.OpenCollection(database.Client, "food")
 
 func main() {
+	fmt.Println("enter the port")
 	port := os.Getenv("PORT")
 
 	if port == "" {
@@ -27,5 +29,5 @@ func main() {
 	routes.UserRoutes(router)
 	router.Use(middleware.Authentication())
 
-	router.Run(":"+ port)
+	router.Run(":" + port)
 }
